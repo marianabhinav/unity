@@ -33,8 +33,8 @@ src/test/java/com/amcrest/unity/AmcrestApplicationTests.java
 
 <a name="documentation"></a>
 ## Documentation
-OpenAPI Specification Swagger documentation is at the default page.
-[http://localhost:8080/]
+OpenAPI Specification Swagger documentation is at the default page.  
+[http://localhost:8080/](http://localhost:8080/)
 
 
 <a name="testing"></a>
