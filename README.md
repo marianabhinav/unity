@@ -3,6 +3,7 @@
 * [Assumptions](#assumptions)  
 * [Dependencies](#dependencies)  
 * [Instructions to run](#instructions-to-run)  
+* [Documentation](#documentation)  
 * [Testing](#testing)  
 * [Database](#database)  
 * [Logging/Monitoring](#loggingmonitoring)  
@@ -28,7 +29,13 @@ Amcrest Unity backend service based on spring boot.
 1. Open project in any IDE as a maven project. And run the main file:
 ```bash
 src/test/java/com/amcrest/unity/AmcrestApplicationTests.java
-```
+``` 
+
+<a name="documentation"></a>
+## Documentation
+OpenAPI Specification Swagger documentation is at the default page.
+[http://localhost:8080/]
+
 
 <a name="testing"></a>
 ## Testing
