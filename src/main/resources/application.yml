@@ -1,0 +1,55 @@
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: never
+
+
+springdoc:
+  swagger-ui:
+    path: /
+
+spring:
+  main:
+    banner-mode: off
+  jpa:
+    show-sql: true
+    generate-ddl: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/unity
+    username: root
+    password: Temp_password1
+    driver-class-name: com.mysql.jdbc.Driver
+  mail:
+    host: localhost
+    port: 1025
+    username: hello
+    password: hello
+
+    properties:
+      mail:
+        smtp:
+          ssl:
+            trust: "*"
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+
+logging:
+  level:
+    org:
+      springframework.boot.autoconfigure: ERROR
+      springframework: DEBUG
+  file:
+    path: ./.logs
+
+application:
+  jwt:
+    claim-user-email: userEmail
+    claim-user-scopes: scope
+    token-expiration-after-days: 3
+    token-prefix: Bearer
+    secret-key: sample_secret_key
