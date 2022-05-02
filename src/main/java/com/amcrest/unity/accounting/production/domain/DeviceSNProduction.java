@@ -1,4 +1,4 @@
-package com.amcrest.unity.accounting.security.jwt;
+package com.amcrest.unity.accounting.production.domain;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class BlacklistedJwtToken {
+public class DeviceSNProduction {
 
     @Schema(hidden = true)
     @Id
@@ -23,7 +23,19 @@ public class BlacklistedJwtToken {
     @Setter(AccessLevel.NONE)
     private Long id;
 
+    @Schema(hidden = true)
+    private String serialNumber;
+
+    @Schema(hidden = true)
     @NotNull
     @NonNull
-    private String token;
+    private String deviceId;
+
+    @NotNull
+    @NonNull
+    private String variantId;
+
+    @NotNull
+    @NonNull
+    private String providerId;
 }

@@ -1,6 +1,5 @@
 package com.amcrest.unity.accounting.user.domain;
 
-import com.amcrest.unity.accounting.email.validation.ValidEmail;
 import com.amcrest.unity.accounting.user.validation.ValidPassword;
 import lombok.*;
 
@@ -15,7 +14,7 @@ import javax.validation.constraints.NotNull;
 public class UserChangePasswordDto {
 
     @NotNull
-    @NonNull
+    @NotEmpty
     private Integer otp;
 
     @NotNull

@@ -2,6 +2,7 @@ package com.amcrest.unity.accounting.user.validation;
 
 import com.amcrest.unity.accounting.security.config.PasswordEncoder;
 import com.amcrest.unity.accounting.user.domain.User;
+import com.amcrest.unity.accounting.user.domain.UserLoginDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -13,10 +14,9 @@ public class UserValidator{
 
     PasswordEncoder passwordEncoder;
 
-    public void validatePassword(User userToVerify, User userStored){
+    public void validatePassword(UserLoginDto userToVerify, User userStored){
         if(!passwordEncoder.bCryptPasswordEncoder()
-                .encode(userToVerify.getPassword())
-                .equals(userStored.getPassword())){
+                .matches(userToVerify.getPassword(), userStored.getPassword())){
             throw new ResponseStatusException(
                     HttpStatus.UNAUTHORIZED, "Invalid credentials."
             );

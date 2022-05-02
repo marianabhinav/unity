@@ -1,5 +1,6 @@
 package com.amcrest.unity.accounting.email.token;
 
+import com.amcrest.unity.accounting.email.token.domain.ConfirmationToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

@@ -1,4 +1,4 @@
-package com.amcrest.unity.accounting.email.token;
+package com.amcrest.unity.accounting.email.token.domain;
 
 import com.amcrest.unity.accounting.user.domain.User;
 import io.swagger.v3.oas.annotations.media.Schema;

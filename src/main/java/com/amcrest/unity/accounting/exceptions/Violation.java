@@ -1,13 +1,15 @@
 package com.amcrest.unity.accounting.exceptions;
 
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
-@Data
-@RequiredArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Violation {
-
-    private final String fieldName;
-
-    private final String message;
+    private Long timestamp;
+    private Integer status;
+    private String error;
+    private String message;
 }

@@ -4,6 +4,7 @@ import com.amcrest.unity.accounting.email.validation.ValidEmail;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 public class UserEmailDto {
 
+    @NotNull
     @NotEmpty
     @ValidEmail
     String email;

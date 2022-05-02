@@ -1,12 +1,14 @@
 package com.amcrest.unity.accounting.security.jwt;
 
+import com.amcrest.unity.accounting.security.jwt.domain.BlacklistedJwtToken;
 import com.amcrest.unity.accounting.user.domain.User;
-import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.UnsupportedJwtException;
+import io.jsonwebtoken.security.SignatureException;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.crypto.SecretKey;
 import java.time.LocalDate;
@@ -23,37 +25,37 @@ public class JwtTokenServiceImpl implements JwtTokenService {
 
     @Override
     public String createJwtToken(User user) {
-        String token = Jwts.builder()
+        String jwtToken = Jwts.builder()
                 .claim(jwtConfig.getClaimUserEmail(), user.getEmail())
                 .claim(jwtConfig.getClaimUserScopes(), user.getAuthorities())
                 .setIssuedAt(new Date())
                 .setExpiration(java.sql.Date.valueOf(LocalDate.now().plusDays(jwtConfig.getTokenExpirationAfterDays())))
                 .signWith(secretKey)
                 .compact();
-        return jwtConfig.getTokenPrefix() + token;
+        return jwtConfig.getTokenPrefix() + " " + jwtToken;
     }
 
     @Override
     public boolean verifyJwtToken(String jwtToken) {
-        String token = jwtToken.replace(jwtConfig.getTokenPrefix(), "");
-        Optional.of(blacklistedJwtTokenRepository.findByToken(token))
-                .ifPresent(e -> {
-                    throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid token.");
-                });
-
+        //TODO: change blacklisted token to cache.
+        Optional<BlacklistedJwtToken> blacklistedJwtToken = (blacklistedJwtTokenRepository.findByToken(jwtToken));
+        if(blacklistedJwtToken.isPresent()) {
+            return false;
+        }
         try {
-            Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
-        } catch (JwtException e) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid token.");
+            Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken);
+        } catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException
+                    | SignatureException | IllegalArgumentException e) {
+           return false;
         }
         return true;
     }
 
     @Override
-    public String getUserNameFromJwtToken(String token) {
+    public String getUserNameFromJwtToken(String jwtToken) {
         return Jwts.parser()
                 .setSigningKey(secretKey)
-                .parseClaimsJws(token)
+                .parseClaimsJws(jwtToken)
                 .getBody()
                 .get(jwtConfig.getClaimUserEmail())
                 .toString();

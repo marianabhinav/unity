@@ -4,7 +4,6 @@ server:
     include-binding-errors: always
     include-stacktrace: never
 
-
 springdoc:
   swagger-ui:
     path: /
@@ -15,17 +14,28 @@ spring:
   jpa:
     show-sql: true
     generate-ddl: true
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+#    database-platform: org.hibernate.dialect.H2Dialect
   datasource:
-    url: jdbc:mysql://localhost:3306/unity
-    username: root
-    password: Temp_password1
-    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://amcrestunity.cftro66prh6w.us-east-1.rds.amazonaws.com:3306/amcrestunity?serverTimezone=UTC&useLegacyDatetimeCode=false
+    username: amcrestunity
+    password: 5cKKNgbcS&Ym#R4r
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#  datasource:
+#    url: jdbc:h2:mem:testdb
+#    username: sa
+#    password: password
+#    driverClassName: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
   mail:
-    host: localhost
-    port: 1025
-    username: hello
-    password: hello
-
+    host: smtp.mailgun.org
+    port: 587
+    username: postmaster@mg.amcrestunity.com
+    password: 4ffefcb0fb27251d919b99f0e03916b1-38029a9d-72fbb344
     properties:
       mail:
         smtp:
@@ -37,6 +47,15 @@ spring:
           connectiontimeout: 5000
           timeout: 3000
           writetimeout: 5000
+  cloud:
+    aws:
+      credentials:
+        access-key: AKIA56IUCZEZV3S53XQG
+        secret-key: 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
+      region:
+        static: us-east-1
+      stack:
+        auto: false
 
 logging:
   level:
@@ -52,4 +71,18 @@ application:
     claim-user-scopes: scope
     token-expiration-after-days: 3
     token-prefix: Bearer
-    secret-key: sample_secret_key
+    secret-key: sample_secret_key_sample_secret_key_sample_secret_key_sample_secret_key
+  sdk:
+    id-length: 11
+    product-id: pr-urotmo9t
+    server-key: sk-8553e6f7a664571a0300e34ec77ffa2e
+  s3:
+    bucket-name: mayanktestunitybucket
+    access-key: AKIA56IUCZEZV3S53XQG
+    secret-key: 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
+    region: us-east-1
+    auto: false
+  braintree:
+    merchant-id: bv5xh43c47krpfkr
+    public-key: sqr8brtt9ym7qbtt
+    private-key: b889426ee49fcb7aea8b33ca9b4a2ebc

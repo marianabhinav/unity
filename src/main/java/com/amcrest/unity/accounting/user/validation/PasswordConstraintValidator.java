@@ -6,12 +6,11 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class PasswordConstraintValidator implements ConstraintValidator<ValidPassword, String> {
 
     @Override
-    public void initialize(ValidPassword arg0) {
+    public void initialize(ValidPassword constraintAnnotation) {
     }
 
     @Override
@@ -19,7 +18,7 @@ public class PasswordConstraintValidator implements ConstraintValidator<ValidPas
         PasswordValidator validator = new PasswordValidator(Arrays.asList(
 
                 // at least 6 characters
-                new LengthRule(6, 30),
+                new LengthRule(6, 100),
 
                 // at least one upper-case character
                 new CharacterRule(EnglishCharacterData.UpperCase, 1),

@@ -1,0 +1,151 @@
+{
+  "device_management": {
+    "firmware": ""
+  },
+  "user_management": {
+    "manage_user": true
+  },
+  "schedules": {
+    "schedule_reboot_days": [],
+    "schedule_reboot_hours": [],
+    "schedule_reboot_minute": [],
+    "auto_poweron_days": [],
+    "auto_poweron_hours": [],
+    "auto_poweron_minute": [],
+    "auto_poweroff_days": [],
+    "auto_poweroff_hours": [],
+    "auto_poweroff_minute": []
+  },
+  "event_detectors": {
+    "motion_detection": {
+      "event_code": 1,
+      "actions": {
+        "enable_alarm": false,
+        "alarm_volume": 8,
+        "enable_flash": false,
+        "record_clip_duration_local": 0,
+        "record_clip_duration_cloud": 0,
+        "record_clip_local": true,
+        "record_clip_cloud": false,
+        "enable_snapshot": false,
+        "snapshot_delay": 500,
+        "cooldown": 1,
+        "sensitivity": 5,
+        "noise": 0
+      }
+    },
+    "video_blind_detection": {
+      "event_code": 2,
+      "actions": {
+        "enable_alarm": false,
+        "alarm_volume": 8,
+        "enable_flash": false,
+        "record_clip_duration_local": 0,
+        "record_clip_duration_cloud": 0,
+        "record_clip_local": true,
+        "record_clip_cloud": false,
+        "enable_snapshot": false,
+        "snapshot_delay": 500,
+        "cooldown": 1
+      }
+    },
+    "sd_card_detection": {
+      "event_code": 3,
+      "actions": {
+        "enable_alarm": false,
+        "alarm_volume": 8,
+        "enable_flash": false,
+        "record_clip_duration_local": 0,
+        "record_clip_duration_cloud": 0,
+        "record_clip_local": true,
+        "record_clip_cloud": false,
+        "enable_snapshot": false,
+        "snapshot_delay": 500,
+        "cooldown": 1
+      }
+    },
+    "sd_card_failure_detection": {
+      "event_code": 4,
+      "actions": {
+        "enable_alarm": false,
+        "alarm_volume": 8,
+        "enable_flash": false,
+        "record_clip_duration_local": 0,
+        "record_clip_duration_cloud": 0,
+        "record_clip_local": true,
+        "record_clip_cloud": false,
+        "enable_snapshot": false,
+        "snapshot_delay": 500,
+        "cooldown": 1
+      }
+    },
+    "sd_card_low_space_detection": {
+      "event_code": 5,
+      "actions": {
+        "enable_alarm": false,
+        "alarm_volume": 8,
+        "enable_flash": false,
+        "record_clip_duration_local": 0,
+        "record_clip_duration_cloud": 0,
+        "record_clip_local": true,
+        "record_clip_cloud": false,
+        "enable_snapshot": false,
+        "snapshot_delay": 500,
+        "cooldown": 1,
+        "sd_low_space_limit": 1024
+      }
+    },
+    "face_detection": {
+      "event_code": 6,
+      "actions": {
+        "enable_alarm": false,
+        "alarm_volume": 8,
+        "enable_flash": false,
+        "record_clip_duration_local": 0,
+        "record_clip_duration_cloud": 0,
+        "record_clip_local": true,
+        "record_clip_cloud": false,
+        "enable_snapshot": false,
+        "snapshot_delay": 500,
+        "cooldown": 1
+      }
+    },
+    "audio_detection": {
+      "event_code": 7,
+      "actions": {
+        "enable_alarm": false,
+        "alarm_volume": 8,
+        "enable_flash": false,
+        "record_clip_duration_local": 0,
+        "record_clip_duration_cloud": 0,
+        "record_clip_local": true,
+        "record_clip_cloud": false,
+        "enable_snapshot": false,
+        "snapshot_delay": 500,
+        "cooldown": 1
+      }
+    }
+  },
+  "cloud": {
+    "record_cloud": "event",
+    "record_clip_local": "event"
+  },
+  "switch_value_features": {
+    "resolution_live": {
+      "feature_code": 9,
+      "value": "360p"
+    },
+    "resolution_sdcard": {
+      "feature_code": 10,
+      "value": "360p"
+    },
+    "resolution_cloud": {
+      "feature_code": 11,
+      "value": "360p"
+    },
+    "speaker_volume": {
+      "feature_code": 12,
+      "value": 8
+    }
+  }
+}

@@ -1,5 +1,6 @@
 package com.amcrest.unity.accounting.email.token;
 
+import com.amcrest.unity.accounting.email.token.domain.ConfirmationToken;
 import com.amcrest.unity.accounting.user.domain.User;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,22 +17,24 @@ public class EmailOtpServiceImpl implements EmailOtpService{
 
     private final ConfirmationTokenRepository confirmationTokenRepository;
 
-    @Transactional
-    public User confirmOtp(Integer otp) {
+    public ConfirmationToken validateOtp(Integer otp){
         ConfirmationToken confirmationToken = confirmationTokenRepository.findByOtp(otp)
                 .orElseThrow(() ->
-                        new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email token invalid.")
+                        new ResponseStatusException(HttpStatus.BAD_REQUEST, "OTP is invalid.")
                 );
+        LocalDateTime expiredAt = confirmationToken.getExpiresAt();
+        if (expiredAt.isBefore(LocalDateTime.now())) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "OTP is expired.");
+        }
+        return confirmationToken;
+    }
+
+    @Transactional
+    public User confirmOtp(Integer otp) {
+        ConfirmationToken confirmationToken = validateOtp(otp);
         if (confirmationToken.getConfirmedAt() != null) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Email already verified.");
         }
-
-        LocalDateTime expiredAt = confirmationToken.getExpiresAt();
-
-        if (expiredAt.isBefore(LocalDateTime.now())) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Email token expired.");
-        }
-
         confirmationTokenRepository.updateConfirmedAt(otp, LocalDateTime.now());
         return confirmationToken.getUser();
     }

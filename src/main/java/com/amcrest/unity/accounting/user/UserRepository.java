@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Repository
@@ -14,6 +15,11 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByEmail(String email);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE User u SET u.lastLoginDate = ?2 WHERE u.email = ?1")
+    int updateLoginDate(String email, LocalDateTime lastLoginDate);
 
     @Transactional
     @Modifying
